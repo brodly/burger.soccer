@@ -1,2 +1,14 @@
-<meta name="color-scheme" content="light dark">
-<img src="burger_soccer.png">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <img src="burger_soccer.png" alt="Burger soccer">
+  <audio id="a" src="loop.m4a" loop autoplay></audio>
+  <script>
+    const a = document.getElementById("a");
+    a.play().catch(() => document.addEventListener("click", () => a.play(), { once: true }));
+  </script>
+</body>
+</html>
