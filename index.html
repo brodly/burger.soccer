@@ -12,7 +12,7 @@
   <audio id="a" src="loop.m4a" loop autoplay></audio>
   <script>
     const a = document.getElementById("a");
-    a.volume = 0.3;
+    a.volume = 0.2;
     a.play().catch(() => document.addEventListener("click", () => a.play(), { once: true }));
   </script>
 </body>
