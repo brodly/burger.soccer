@@ -15,7 +15,7 @@
   <script>
     const ctx = new AudioContext();
     const gain = ctx.createGain();
-    gain.gain.value = 0.1;
+    gain.gain.value = 0.03;
     gain.connect(ctx.destination);
 
     fetch("loop.mp3").then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(buf => {
@@ -26,7 +26,9 @@
       s.start();
     });
 
-    document.addEventListener("click", () => ctx.resume(), { once: true });
+    const unlock = () => { if (ctx.state !== "running") ctx.resume(); };
+    document.addEventListener("touchend", unlock);
+    document.addEventListener("click", unlock);
   </script>
 </body>
 </html>
