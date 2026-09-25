@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta name="color-scheme" content="light dark">
+  <title>Burger Soccer</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
   <style>
     body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
     img { max-width: 100%; }
@@ -9,11 +12,21 @@
 </head>
 <body>
   <img src="burger_soccer.png" alt="Burger soccer">
-  <audio id="a" src="loop.mp3" loop autoplay></audio>
   <script>
-    const a = document.getElementById("a");
-    a.volume = 0.1;
-    a.play().catch(() => document.addEventListener("click", () => a.play(), { once: true }));
+    const ctx = new AudioContext();
+    const gain = ctx.createGain();
+    gain.gain.value = 0.1;
+    gain.connect(ctx.destination);
+
+    fetch("loop.mp3").then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(buf => {
+      const s = ctx.createBufferSource();
+      s.buffer = buf;
+      s.loop = true;
+      s.connect(gain);
+      s.start();
+    });
+
+    document.addEventListener("click", () => ctx.resume(), { once: true });
   </script>
 </body>
 </html>
