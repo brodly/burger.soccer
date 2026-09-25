@@ -13,6 +13,8 @@
 <body>
   <img src="burger_soccer.png" alt="Burger soccer">
   <script>
+    if (navigator.audioSession) navigator.audioSession.type = "playback";
+
     const ctx = new AudioContext();
     const gain = ctx.createGain();
     gain.gain.value = 0.03;
